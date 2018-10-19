@@ -27,10 +27,19 @@ app.use(express.static('./public')); // load UI from public folder
 app.use(bodyParser.json());
 
 // Create the service wrapper
-
+/*
 var assistant = new AssistantV1({
   version: '2018-07-10'
 });
+*/
+var assistant = new AssistantV1({
+  url: process.env.ASSISTANT_URL,
+  version: process.env.VERSION,
+  username: 'apikey',
+  password: process.env.API_KEY,
+  disable_ssl_verification: true
+});
+
 
 // Endpoint to be call from the client side
 app.post('/api/message', function (req, res) {
